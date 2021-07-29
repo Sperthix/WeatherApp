@@ -9,6 +9,33 @@
     <title>Weather app</title>
 </head>
 <body>
+
+    <div class="container my-5 mx-auto">
+
+        <h1 class="text-muted text-center my-4">Dr. Ilko weather forecast</h1>
+
+        <form class="change-location my-4 text-center text-muted">
+            <label for="city">Enter a location for weather forecast.</label>
+            <input type="text" name="city" class="form-control p-4">
+        </form>
+
+        <div class="card shadow-lg rounded">
+            <img src="https://via.placeholder.com/400x300" class="time card-img-top" alt="image representing weather in selected area">
+            <div class="icon bg-ligh mx-auto text-center">
+            <!--icon-->
+            </div>
+            <div class="text-muted tet-uppercase text-center detail">
+                <h5 class="my-3">City Name</h5>
+                <div class="my-3">Weather Condition</div>
+                <div class="display-4 my-4">
+                    <span>temp</span>
+                    <span>&deg;C</span>
+                </div>
+            </div>
+        </div>
+
+    </div>    
+
     <script src="Scripts/forecast.js"></script>
     <script src="Scripts/app.js"></script>
 </body>
