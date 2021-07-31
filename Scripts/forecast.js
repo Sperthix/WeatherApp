@@ -25,11 +25,8 @@ const getWeather = async cityID => {
 
 }
 
-getWeather('297345');
-
-
-getCity('Bratislava')
-    .then(data => getWeather(data.Key))
-    .then(data => console.log(data))
-    .catch(err => console.log(err));
+// getCity('')
+//     .then(data => getWeather(data.Key))
+//     .then(data => console.log(data))
+//     .catch(err => console.log(err));
 
