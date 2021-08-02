@@ -4,6 +4,8 @@ const details = document.querySelector('.details');
 const time = document.querySelector('img.time');
 const icon = document.querySelector('.icon img');
 
+let previousCity = null;
+
 const updateCity = async city => {
     
     const cityDetails = await getCity(city);
@@ -60,10 +62,25 @@ const UpdateUI = data => {
 input.addEventListener('submit', e => {
     e.preventDefault();
 
+    // get requested city form input field and reseting it
     const requestedCity = input.city.value.trim();
+    localStorage.setItem('city', requestedCity);
     input.reset();
 
+
+    // updating page with new data
     updateCity(requestedCity)
     .then(data => UpdateUI(data))
     .catch(err => console.log(err));
 });
+
+
+//chceck if there is a stored location
+if(localStorage.city){
+
+    previousCity = localStorage.getItem('city');
+
+    updateCity(previousCity)
+    .then(data => UpdateUI(data))
+    .catch(err => console.log(err));
+}
