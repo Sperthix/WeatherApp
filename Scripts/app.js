@@ -4,24 +4,9 @@ const details = document.querySelector('.details');
 const time = document.querySelector('img.time');
 const icon = document.querySelector('.icon img');
 
+const forecast = new Forecast();
+
 let previousCity = null;
-
-const updateCity = async city => {
-    
-    const cityDetails = await getCity(city);
-    const currWeather = await getWeather(cityDetails.Key);
-
-    //objekt sa da zapisat aj kratsie, ak su rovnake nazvy aj pre parameter aj hodnotu
-    // return {
-    //     cityDetails: cityDetails,
-    //     currWeather: currWeather
-    // };
-
-    return {
-        cityDetails,
-        currWeather
-    };
-};
 
 const UpdateUI = data => {
 
@@ -64,14 +49,18 @@ input.addEventListener('submit', e => {
 
     // get requested city form input field and reseting it
     const requestedCity = input.city.value.trim();
-    localStorage.setItem('city', requestedCity);
-    input.reset();
+    if(requestedCity.length > 0){
+        localStorage.setItem('city', requestedCity);
+        input.reset();
 
-
-    // updating page with new data
-    updateCity(requestedCity)
-    .then(data => UpdateUI(data))
-    .catch(err => console.log(err));
+        // updating page with new data
+        forecast.updateCity(requestedCity)
+        .then(data => UpdateUI(data))
+        .catch(err => console.log(err));
+    }
+    else{
+        console.log('Please enter something before submiting the form');
+    }
 });
 
 
@@ -80,7 +69,7 @@ if(localStorage.city){
 
     previousCity = localStorage.getItem('city');
 
-    updateCity(previousCity)
+    forecast.updateCity(previousCity)
     .then(data => UpdateUI(data))
     .catch(err => console.log(err));
 }
